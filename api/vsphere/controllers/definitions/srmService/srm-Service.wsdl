@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+   Copyright 2005-2016 VMware, Inc.  All rights reserved.
+-->
+<definitions targetNamespace="urn:srm0Service"
+   xmlns="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+   xmlns:interface="urn:srm0"
+>
+   <import location="srm.wsdl" namespace="urn:srm0" />
+   <service name="SrmService">
+      <port binding="interface:SrmBinding" name="SrmPort">
+         <soap:address location="https://localhost:9086/vcdr/extapi/sdk" />
+      </port>
+   </service>
+</definitions>

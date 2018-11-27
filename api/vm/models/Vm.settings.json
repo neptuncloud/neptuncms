@@ -1,0 +1,58 @@
+{
+  "connection": "default",
+  "collectionName": "vm",
+  "info": {
+    "name": "vm",
+    "description": "Virtual Machine"
+  },
+  "options": {
+    "timestamps": true
+  },
+  "attributes": {
+    "Name": {
+      "default": "",
+      "unique": true,
+      "type": "string",
+      "required": true
+    },
+    "CPU": {
+      "default": 1,
+      "type": "integer",
+      "required": true
+    },
+    "RAM": {
+      "default": 1,
+      "type": "integer",
+      "required": true
+    },
+    "Net": {
+      "model": "net",
+      "via": "vms"
+    },
+    "Project": {
+      "model": "project",
+      "via": "vms"
+    },
+    "vmHistories": {
+      "collection": "vmhistory",
+      "via": "vm"
+    },
+    "Profile": {
+      "model": "profile",
+      "via": "vms"
+    },
+    "State": {
+      "default": "",
+      "type": "enumeration",
+      "enum": [
+        "Order",
+        "Active",
+        "Removed\n"
+      ]
+    },
+    "ip": {
+      "default": "",
+      "type": "string"
+    }
+  }
+}

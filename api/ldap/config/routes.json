@@ -1,0 +1,19 @@
+{
+  "routes": [
+    {
+      "method": "POST",
+      "path": "/ldap",
+      "handler": "Ldap.auth"
+    },
+    {
+      "method": "POST",
+      "path": "/ldap/token",
+      "handler": "Ldap.token"
+    },
+    {
+      "method": "POST",
+      "path": "/ldap/info",
+      "handler": "Ldap.info"
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+provider "vsphere" { 
+  user           = "<%= vsphere_user %>"
+  password       = "<%= vsphere_pass %>"
+  vsphere_server = "<%= vsphere_server %>"
+  allow_unverified_ssl = true
+}
+
+data "vsphere_datacenter" "dc" {
+  name = "<%- datacenter %>"
+}
+
+data "vsphere_datastore" "datastore" {
+  name          = "<%- datastore %>"
+  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+}
+
+
+data "vsphere_resource_pool" "pool" {
+  name          = "<%- resourcepool %>"
+  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+}
+
+data "vsphere_network" "network" {
+  name          = "<%- vlan %>"
+  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+}
+
+data "vsphere_virtual_machine" "tmpl" {
+  name          = "<%- tmpl %>"
+  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+}
+
+resource "vsphere_virtual_machine" "<%- vmname %>" {
+  name             = "<%- vmname %>"
+  resource_pool_id = "${data.vsphere_resource_pool.pool.id}"
+  datastore_id     = "${data.vsphere_datastore.datastore.id}"
+
+  num_cpus = <%= cpu %>
+  memory   = <%= ram %>
+  guest_id = "${data.vsphere_virtual_machine.tmpl.guest_id}"
+
+  scsi_type = "${data.vsphere_virtual_machine.tmpl.scsi_type}"
+
+  network_interface {
+    network_id = "${data.vsphere_network.network.id}"
+   adapter_type = "${data.vsphere_virtual_machine.tmpl.network_interface_types[0]}"
+  }
+
+  disk {
+    label            = "disk0"
+    size             = "${data.vsphere_virtual_machine.tmpl.disks.0.size}"
+    eagerly_scrub    = "${data.vsphere_virtual_machine.tmpl.disks.0.eagerly_scrub}"
+    thin_provisioned = "${data.vsphere_virtual_machine.tmpl.disks.0.thin_provisioned}"
+  }
+
+
+  clone {
+    template_uuid = "${data.vsphere_virtual_machine.tmpl.id}"
+
+    customize {
+      linux_options {
+        host_name = "<%- vmname %>"
+        domain    = "<%- vmdomain %>"
+      }
+
+      network_interface {
+        ipv4_address = "<%= ip %>"
+        ipv4_netmask = <%= mask %>
+
+      }
+
+      ipv4_gateway = "<%= gateway %>"
+    }
+  }
+}

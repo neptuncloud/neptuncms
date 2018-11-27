@@ -1,0 +1,13 @@
+{
+  "hostname": "neptun.example.com",
+  "vsphere_host": "vcenter.example.comf",
+  "vsphere_user": "Administrator@example.local",
+  "vsphere_pass": "supersecret",
+  "vmdomain": "example.com",
+  "terraform_workdir":"/neptun/trfm",
+  "ldap_binddn": "neptun@example.com",
+  "ldap_url": "ldap://ldap.example.com",
+  "ldap_bindCredentials": "superldapsecret",
+  "ldap_searchBase": "ou=example,dc=example,dc=com",
+  "ldap_searchFilter": "(sAMAccountName={{username}})"  
+}

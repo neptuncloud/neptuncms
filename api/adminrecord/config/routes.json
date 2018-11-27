@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/adminrecords",
+      "handler": "Adminrecord.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/adminrecords/count",
+      "handler": "Adminrecord.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/adminrecords/:_id",
+      "handler": "Adminrecord.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/adminrecords",
+      "handler": "Adminrecord.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/adminrecords/:_id",
+      "handler": "Adminrecord.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/adminrecords/:_id",
+      "handler": "Adminrecord.destroy",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

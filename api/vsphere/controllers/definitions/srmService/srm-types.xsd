@@ -1,0 +1,782 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+   Copyright 2005-2016 VMware, Inc.  All rights reserved.
+-->
+<schema
+   targetNamespace="urn:srm0"
+   xmlns="http://www.w3.org/2001/XMLSchema"
+   xmlns:srm0="urn:srm0"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+   xmlns:vim25="urn:vim25"
+   xmlns:reflect="urn:reflect"
+   elementFormDefault="qualified"
+>
+   <import namespace="urn:vim25" schemaLocation="query-types.xsd" />
+   <import namespace="urn:vim25" schemaLocation="vim-types.xsd" />
+   <import namespace="urn:vim25" schemaLocation="core-types.xsd" />
+   <import namespace="urn:reflect" schemaLocation="reflect-types.xsd" />
+   <complexType name="SrmCallout">
+      <complexContent>
+         <extension base="vim25:DynamicData">
+            <sequence>
+               <element name="description" type="xsd:string" />
+               <element name="uuid" type="xsd:string" />
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="ArrayOfSrmCallout">
+      <sequence>
+         <element name="SrmCallout" type="srm0:SrmCallout" minOccurs="0" maxOccurs="unbounded" />
+      </sequence>
+   </complexType>
+   <complexType name="SrmCommand">
+      <complexContent>
+         <extension base="srm0:SrmCallout">
+            <sequence>
+               <element name="command" type="xsd:string" />
+               <element name="timeout" type="xsd:long" />
+               <element name="runInRecoveredVm" type="xsd:boolean" />
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <simpleType name="SrmApiRecoveryMode">
+      <restriction base="xsd:string">
+         <enumeration value="recovery" />
+         <enumeration value="test" />
+         <enumeration value="migration" />
+      </restriction>
+   </simpleType>
+   <simpleType name="SrmApiRecoveryState">
+      <restriction base="xsd:string">
+         <enumeration value="uninitialized" />
+         <enumeration value="running" />
+         <enumeration value="cancelled" />
+         <enumeration value="paused" />
+         <enumeration value="prompting" />
+         <enumeration value="completed" />
+         <enumeration value="error" />
+      </restriction>
+   </simpleType>
+   <complexType name="SrmApiSettings">
+      <complexContent>
+         <extension base="vim25:DynamicData">
+            <sequence>
+               <element name="name" type="xsd:string" />
+               <element name="description" type="xsd:string" minOccurs="0" />
+               <element name="state" type="srm0:SrmApiRecoveryState" />
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SrmDiscoverDevicesTaskDiscoverDevicesFailure">
+      <complexContent>
+         <extension base="vim25:DynamicData">
+            <sequence>
+               <element name="name" type="xsd:string" />
+               <element name="fault" type="vim25:LocalizedMethodFault" />
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="ArrayOfSrmDiscoverDevicesTaskDiscoverDevicesFailure">
+      <sequence>
+         <element name="SrmDiscoverDevicesTaskDiscoverDevicesFailure" type="srm0:SrmDiscoverDevicesTaskDiscoverDevicesFailure" minOccurs="0" maxOccurs="unbounded" />
+      </sequence>
+   </complexType>
+   <complexType name="SrmLocalSiteInfo">
+      <complexContent>
+         <extension base="vim25:DynamicData">
+            <sequence>
+               <element name="siteName" type="xsd:string" />
+               <element name="siteUuid" type="xsd:string" />
+               <element name="lkpUrl" type="xsd:string" minOccurs="0" />
+               <element name="vcUrl" type="xsd:string" minOccurs="0" />
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SrmPrompt">
+      <complexContent>
+         <extension base="srm0:SrmCallout">
+            <sequence>
+               <element name="promptText" type="xsd:string" />
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SrmProtectionInventoryMappingInfo">
+      <complexContent>
+         <extension base="vim25:DynamicData">
+            <sequence>
+               <element name="pools" type="vim25:ManagedObjectReference" minOccurs="0" maxOccurs="unbounded" />
+               <element name="folders" type="vim25:ManagedObjectReference" minOccurs="0" maxOccurs="unbounded" />
+               <element name="networks" type="vim25:ManagedObjectReference" minOccurs="0" maxOccurs="unbounded" />
+               <element name="testNetworks" type="vim25:ManagedObjectReference" minOccurs="0" maxOccurs="unbounded" />
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <simpleType name="SrmProtectionGroupProtectionState">
+      <restriction base="xsd:string">
+         <enumeration value="ready" />
+         <enumeration value="failedOver" />
+         <enumeration value="partiallyRecovered" />
+         <enumeration value="recovering" />
+         <enumeration value="recovered" />
+         <enumeration value="testing" />
+         <enumeration value="shadowing" />
+      </restriction>
+   </simpleType>
+   <simpleType name="SrmProtectionGroupReplicationType">
+      <restriction base="xsd:string">
+         <enumeration value="san" />
+         <enumeration value="vr" />
+      </restriction>
+   </simpleType>
+   <complexType name="SrmProtectionGroupInfo">
+      <complexContent>
+         <extension base="vim25:DynamicData">
+            <sequence>
+               <element name="name" type="xsd:string" />
+               <element name="description" type="xsd:string" minOccurs="0" />
+               <element name="type" type="xsd:string" minOccurs="0" />
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SrmProtectionGroupProtectedVm">
+      <complexContent>
+         <extension base="vim25:DynamicData">
+            <sequence>
+               <element name="vm" type="vim25:ManagedObjectReference" />
+               <element name="protectedVm" type="xsd:string" />
+               <element name="peerProtectedVm" type="xsd:string" />
+               <element name="state" type="srm0:SrmProtectionGroupProtectionState" />
+               <element name="peerState" type="srm0:SrmProtectionGroupProtectionState" />
+               <element name="needsConfiguration" type="xsd:boolean" />
+               <element name="faults" type="vim25:LocalizedMethodFault" minOccurs="0" maxOccurs="unbounded" />
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="ArrayOfSrmProtectionGroupProtectedVm">
+      <sequence>
+         <element name="SrmProtectionGroupProtectedVm" type="srm0:SrmProtectionGroupProtectedVm" minOccurs="0" maxOccurs="unbounded" />
+      </sequence>
+   </complexType>
+   <simpleType name="SrmProtectionGroupVmProtectionInfoProtectionStatus">
+      <restriction base="xsd:string">
+         <enumeration value="isProtected" />
+         <enumeration value="canBeProtected" />
+         <enumeration value="canNotBeProtected" />
+         <enumeration value="needsConfiguration" />
+      </restriction>
+   </simpleType>
+   <complexType name="SrmProtectionGroupVmProtectionInfo">
+      <complexContent>
+         <extension base="vim25:DynamicData">
+            <sequence>
+               <element name="vm" type="vim25:ManagedObjectReference" />
+               <element name="protectedVm" type="xsd:string" minOccurs="0" />
+               <element name="peerProtectedVm" type="xsd:string" minOccurs="0" />
+               <element name="status" type="srm0:SrmProtectionGroupVmProtectionInfoProtectionStatus" />
+               <element name="protectionGroup" type="vim25:ManagedObjectReference" minOccurs="0" />
+               <element name="protectionGroupName" type="xsd:string" minOccurs="0" />
+               <element name="recoveryPlans" type="vim25:ManagedObjectReference" minOccurs="0" maxOccurs="unbounded" />
+               <element name="recoveryPlanNames" type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
+               <element name="faults" type="vim25:LocalizedMethodFault" minOccurs="0" maxOccurs="unbounded" />
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="ArrayOfSrmProtectionGroupVmProtectionInfo">
+      <sequence>
+         <element name="SrmProtectionGroupVmProtectionInfo" type="srm0:SrmProtectionGroupVmProtectionInfo" minOccurs="0" maxOccurs="unbounded" />
+      </sequence>
+   </complexType>
+   <complexType name="SrmProtectionGroupVmProtectionSpec">
+      <complexContent>
+         <extension base="vim25:DynamicData">
+            <sequence>
+               <element name="vm" type="vim25:ManagedObjectReference" />
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="ArrayOfSrmProtectionGroupVmProtectionSpec">
+      <sequence>
+         <element name="SrmProtectionGroupVmProtectionSpec" type="srm0:SrmProtectionGroupVmProtectionSpec" minOccurs="0" maxOccurs="unbounded" />
+      </sequence>
+   </complexType>
+   <complexType name="SrmProtectionGroupPeer">
+      <complexContent>
+         <extension base="vim25:DynamicData">
+            <sequence>
+               <element name="group" type="vim25:ManagedObjectReference" />
+               <element name="state" type="srm0:SrmProtectionGroupProtectionState" />
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <simpleType name="SrmProtectionGroupOperationalLocation">
+      <restriction base="xsd:string">
+         <enumeration value="inProtectedSite" />
+         <enumeration value="notInProtectedSite" />
+         <enumeration value="unknownLocation" />
+      </restriction>
+   </simpleType>
+   <complexType name="SrmProtectionTaskVmTask">
+      <complexContent>
+         <extension base="vim25:DynamicData">
+            <sequence>
+               <element name="vm" type="vim25:ManagedObjectReference" />
+               <element name="task" type="vim25:ManagedObjectReference" />
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="ArrayOfSrmProtectionTaskVmTask">
+      <sequence>
+         <element name="SrmProtectionTaskVmTask" type="srm0:SrmProtectionTaskVmTask" minOccurs="0" maxOccurs="unbounded" />
+      </sequence>
+   </complexType>
+   <complexType name="SrmRecoveryTestNetworkMapping">
+      <complexContent>
+         <extension base="vim25:DynamicData">
+            <sequence>
+               <element name="key" type="vim25:ManagedObjectReference" />
+               <element name="testNetwork" type="vim25:ManagedObjectReference" />
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="ArrayOfSrmRecoveryTestNetworkMapping">
+      <sequence>
+         <element name="SrmRecoveryTestNetworkMapping" type="srm0:SrmRecoveryTestNetworkMapping" minOccurs="0" maxOccurs="unbounded" />
+      </sequence>
+   </complexType>
+   <complexType name="SrmRecoveryOptions">
+      <complexContent>
+         <extension base="vim25:DynamicData">
+            <sequence>
+               <element name="syncData" type="xsd:boolean" minOccurs="0" />
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <simpleType name="SrmRecoveryPlanRecoveryMode">
+      <restriction base="xsd:string">
+         <enumeration value="failover" />
+         <enumeration value="test" />
+         <enumeration value="cleanupTest" />
+         <enumeration value="reprotect" />
+         <enumeration value="revert" />
+         <enumeration value="migrate" />
+      </restriction>
+   </simpleType>
+   <simpleType name="SrmRecoveryPlanRecoveryState">
+      <restriction base="xsd:string">
+         <enumeration value="ready" />
+         <enumeration value="protecting" />
+         <enumeration value="running" />
+         <enumeration value="cancelling" />
+         <enumeration value="prompting" />
+         <enumeration value="failedOver" />
+         <enumeration value="needsCleanup" />
+         <enumeration value="needsFailover" />
+         <enumeration value="needsRollback" />
+         <enumeration value="needsReprotect" />
+         <enumeration value="error" />
+      </restriction>
+   </simpleType>
+   <simpleType name="SrmRecoveryPlanRecoveryPlanLocation">
+      <restriction base="xsd:string">
+         <enumeration value="localToRecoverySite" />
+         <enumeration value="notLocalToRecoverySite" />
+         <enumeration value="unknownLocationNoPgs" />
+         <enumeration value="unknownLocation" />
+      </restriction>
+   </simpleType>
+   <complexType name="SrmRecoveryPlanRecoveryPrompt">
+      <complexContent>
+         <extension base="vim25:DynamicData">
+            <sequence>
+               <element name="key" type="xsd:string" />
+               <element name="data" type="xsd:string" />
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="ArrayOfSrmRecoveryPlanRecoveryPrompt">
+      <sequence>
+         <element name="SrmRecoveryPlanRecoveryPrompt" type="srm0:SrmRecoveryPlanRecoveryPrompt" minOccurs="0" maxOccurs="unbounded" />
+      </sequence>
+   </complexType>
+   <complexType name="SrmRecoveryPlanInfo">
+      <complexContent>
+         <extension base="vim25:DynamicData">
+            <sequence>
+               <element name="name" type="xsd:string" />
+               <element name="description" type="xsd:string" minOccurs="0" />
+               <element name="state" type="srm0:SrmRecoveryPlanRecoveryState" />
+               <element name="protectionGroups" type="vim25:ManagedObjectReference" minOccurs="0" maxOccurs="unbounded" />
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SrmRecoveryPlanPeer">
+      <complexContent>
+         <extension base="vim25:DynamicData">
+            <sequence>
+               <element name="plan" type="vim25:ManagedObjectReference" minOccurs="0" />
+               <element name="state" type="srm0:SrmRecoveryPlanRecoveryState" minOccurs="0" />
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <simpleType name="SrmRecoveryResultResultState">
+      <restriction base="xsd:string">
+         <enumeration value="success" />
+         <enumeration value="warnings" />
+         <enumeration value="errors" />
+         <enumeration value="cancelled" />
+      </restriction>
+   </simpleType>
+   <complexType name="SrmRecoveryResult">
+      <complexContent>
+         <extension base="vim25:DynamicData">
+            <sequence>
+               <element name="key" type="xsd:int" />
+               <element name="plan" type="vim25:ManagedObjectReference" minOccurs="0" />
+               <element name="name" type="xsd:string" />
+               <element name="description" type="xsd:string" minOccurs="0" />
+               <element name="startTime" type="xsd:dateTime" />
+               <element name="stopTime" type="xsd:dateTime" />
+               <element name="executionTimeInSeconds" type="xsd:long" />
+               <element name="totalPausedTimeInSeconds" type="xsd:long" />
+               <element name="resultState" type="srm0:SrmRecoveryResultResultState" />
+               <element name="runMode" type="srm0:SrmRecoveryPlanRecoveryMode" />
+               <element name="warningCount" type="xsd:int" />
+               <element name="errorCount" type="xsd:int" />
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="ArrayOfSrmRecoveryResult">
+      <sequence>
+         <element name="SrmRecoveryResult" type="srm0:SrmRecoveryResult" minOccurs="0" maxOccurs="unbounded" />
+      </sequence>
+   </complexType>
+   <simpleType name="SrmRecoverySettingsStatus">
+      <restriction base="xsd:string">
+         <enumeration value="ok" />
+         <enumeration value="syncConflict" />
+      </restriction>
+   </simpleType>
+   <simpleType name="SrmRecoverySettingsRecoveryPriority">
+      <restriction base="xsd:string">
+         <enumeration value="highest" />
+         <enumeration value="higher" />
+         <enumeration value="normal" />
+         <enumeration value="lower" />
+         <enumeration value="lowest" />
+      </restriction>
+   </simpleType>
+   <complexType name="SrmRecoverySettings">
+      <complexContent>
+         <extension base="vim25:DynamicData">
+            <sequence>
+               <element name="changeVersion" type="xsd:long" minOccurs="0" />
+               <element name="status" type="xsd:string" />
+               <element name="recoveryPriority" type="xsd:string" />
+               <element name="skipGuestShutdown" type="xsd:boolean" />
+               <element name="powerOffTimeoutSeconds" type="xsd:int" minOccurs="0" />
+               <element name="finalPowerState" type="vim25:VirtualMachinePowerState" />
+               <element name="localFaultToleranceState" type="xsd:boolean" />
+               <element name="remoteFaultToleranceState" type="xsd:boolean" />
+               <element name="powerOnTimeoutSeconds" type="xsd:int" minOccurs="0" />
+               <element name="powerOnDelaySeconds" type="xsd:int" minOccurs="0" />
+               <element name="prePowerOnCallouts" type="srm0:SrmCallout" minOccurs="0" maxOccurs="unbounded" />
+               <element name="postPowerOnCallouts" type="srm0:SrmCallout" minOccurs="0" maxOccurs="unbounded" />
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SrmRemoteSite">
+      <complexContent>
+         <extension base="vim25:DynamicData">
+            <sequence>
+               <element name="name" type="xsd:string" />
+               <element name="uuid" type="xsd:string" />
+               <element name="vcHost" type="xsd:string" />
+               <element name="vcPort" type="xsd:int" />
+               <element name="lkpUrl" type="xsd:string" minOccurs="0" />
+               <element name="vcInstanceUuid" type="xsd:string" minOccurs="0" />
+               <element name="vcUrl" type="xsd:string" minOccurs="0" />
+               <element name="connected" type="xsd:boolean" minOccurs="0" />
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SrmServiceInstanceContent">
+      <complexContent>
+         <extension base="vim25:DynamicData">
+            <sequence>
+               <element name="apiVersion" type="xsd:string" minOccurs="0" />
+               <element name="srmApi" type="vim25:ManagedObjectReference" minOccurs="0" />
+               <element name="protection" type="vim25:ManagedObjectReference" minOccurs="0" />
+               <element name="recovery" type="vim25:ManagedObjectReference" minOccurs="0" />
+               <element name="inventoryMapping" type="vim25:ManagedObjectReference" minOccurs="0" />
+               <element name="storage" type="vim25:ManagedObjectReference" minOccurs="0" />
+               <element name="about" type="vim25:AboutInfo" minOccurs="0" />
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SrmSolutionUserInfo">
+      <complexContent>
+         <extension base="vim25:DynamicData">
+            <sequence>
+               <element name="username" type="xsd:string" />
+               <element name="siteUuid" type="xsd:string" />
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SrmFaultAlreadyExists">
+      <complexContent>
+         <extension base="vim25:MethodFault">
+            <sequence>
+               <element name="name" type="xsd:string" minOccurs="0" />
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SrmFaultAlreadyLoggedInFault">
+      <complexContent>
+         <extension base="vim25:MethodFault">
+            <sequence>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SrmFaultConnectionDownFault">
+      <complexContent>
+         <extension base="vim25:MethodFault">
+            <sequence>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SrmFaultConnectionLimitReached">
+      <complexContent>
+         <extension base="vim25:MethodFault">
+            <sequence>
+               <element name="connectionLimit" type="xsd:int" />
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SrmFaultDependencyConflict">
+      <complexContent>
+         <extension base="vim25:MethodFault">
+            <sequence>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SrmFaultDirectionError">
+      <complexContent>
+         <extension base="vim25:MethodFault">
+            <sequence>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SrmFaultDuplicateName">
+      <complexContent>
+         <extension base="vim25:MethodFault">
+            <sequence>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SrmFaultInsufficientLicensesFault">
+      <complexContent>
+         <extension base="vim25:MethodFault">
+            <sequence>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SrmFaultInternalError">
+      <complexContent>
+         <extension base="vim25:MethodFault">
+            <sequence>
+               <element name="reason" type="xsd:string" />
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SrmFaultInvalidArgument">
+      <complexContent>
+         <extension base="vim25:MethodFault">
+            <sequence>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SrmFaultInvalidLogin">
+      <complexContent>
+         <extension base="vim25:MethodFault">
+            <sequence>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SrmFaultInvalidPrimaryFolder">
+      <complexContent>
+         <extension base="vim25:MethodFault">
+            <sequence>
+               <element name="folder" type="vim25:ManagedObjectReference" />
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SrmFaultInvalidPrimaryNetwork">
+      <complexContent>
+         <extension base="vim25:MethodFault">
+            <sequence>
+               <element name="network" type="vim25:ManagedObjectReference" />
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SrmFaultInvalidSecondaryFolder">
+      <complexContent>
+         <extension base="vim25:MethodFault">
+            <sequence>
+               <element name="site" type="srm0:SrmRemoteSite" />
+               <element name="folder" type="vim25:ManagedObjectReference" />
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SrmFaultInvalidSecondaryNetwork">
+      <complexContent>
+         <extension base="vim25:MethodFault">
+            <sequence>
+               <element name="site" type="srm0:SrmRemoteSite" />
+               <element name="network" type="vim25:ManagedObjectReference" />
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SrmFaultInvalidState">
+      <complexContent>
+         <extension base="vim25:MethodFault">
+            <sequence>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SrmFaultMultipleFault">
+      <complexContent>
+         <extension base="vim25:MethodFault">
+            <sequence>
+               <element name="faults" type="vim25:LocalizedMethodFault" maxOccurs="unbounded" />
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SrmFaultNetworkNotFound">
+      <complexContent>
+         <extension base="vim25:MethodFault">
+            <sequence>
+               <element name="name" type="xsd:string" />
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SrmFaultNoPermission">
+      <complexContent>
+         <extension base="vim25:RuntimeFault">
+            <sequence>
+               <element name="object" type="vim25:ManagedObjectReference" />
+               <element name="privilegeId" type="xsd:string" />
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SrmFaultNotAuthenticated">
+      <complexContent>
+         <extension base="vim25:MethodFault">
+            <sequence>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SrmFaultPromptNotFound">
+      <complexContent>
+         <extension base="vim25:MethodFault">
+            <sequence>
+               <element name="key" type="xsd:string" />
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SrmFaultProtectionGroupNotEmpty">
+      <complexContent>
+         <extension base="vim25:MethodFault">
+            <sequence>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SrmFaultProtectionGroupNotFound">
+      <complexContent>
+         <extension base="vim25:MethodFault">
+            <sequence>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SrmFaultRecoveryPlanLocked">
+      <complexContent>
+         <extension base="vim25:MethodFault">
+            <sequence>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SrmFaultRecoveryPlanNotFound">
+      <complexContent>
+         <extension base="vim25:MethodFault">
+            <sequence>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SrmFaultRecoveryResultNotFound">
+      <complexContent>
+         <extension base="vim25:MethodFault">
+            <sequence>
+               <element name="runKey" type="xsd:int" />
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SrmFaultRemoteSiteNotAuthenticated">
+      <complexContent>
+         <extension base="vim25:MethodFault">
+            <sequence>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SrmFaultRemoteSiteNotEnabled">
+      <complexContent>
+         <extension base="vim25:MethodFault">
+            <sequence>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SrmFaultReplicationProviderFault">
+      <complexContent>
+         <extension base="vim25:MethodFault">
+            <sequence>
+               <element name="fault" type="vim25:LocalizedMethodFault" />
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SrmFaultStringArgumentTooLong">
+      <complexContent>
+         <extension base="vim25:MethodFault">
+            <sequence>
+               <element name="invalidProperty" type="xsd:string" />
+               <element name="maxSize" type="xsd:int" />
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SrmFaultUnknownPrimaryFolder">
+      <complexContent>
+         <extension base="vim25:MethodFault">
+            <sequence>
+               <element name="folder" type="vim25:ManagedObjectReference" />
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SrmFaultUnknownPrimaryNetwork">
+      <complexContent>
+         <extension base="vim25:MethodFault">
+            <sequence>
+               <element name="network" type="vim25:ManagedObjectReference" />
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SrmFaultUnknownPrimaryResourcePool">
+      <complexContent>
+         <extension base="vim25:MethodFault">
+            <sequence>
+               <element name="pool" type="vim25:ManagedObjectReference" />
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SrmFaultUnknownSecondaryFolder">
+      <complexContent>
+         <extension base="vim25:MethodFault">
+            <sequence>
+               <element name="site" type="srm0:SrmRemoteSite" />
+               <element name="primaryObjects" type="vim25:ManagedObjectReference" minOccurs="0" maxOccurs="unbounded" />
+               <element name="folder" type="vim25:ManagedObjectReference" />
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SrmFaultUnknownSecondaryNetwork">
+      <complexContent>
+         <extension base="vim25:MethodFault">
+            <sequence>
+               <element name="site" type="srm0:SrmRemoteSite" />
+               <element name="primaryObjects" type="vim25:ManagedObjectReference" minOccurs="0" maxOccurs="unbounded" />
+               <element name="network" type="vim25:ManagedObjectReference" />
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SrmFaultUnknownSecondaryResourcePool">
+      <complexContent>
+         <extension base="vim25:MethodFault">
+            <sequence>
+               <element name="site" type="srm0:SrmRemoteSite" />
+               <element name="primaryObjects" type="vim25:ManagedObjectReference" minOccurs="0" maxOccurs="unbounded" />
+               <element name="pool" type="vim25:ManagedObjectReference" />
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SrmFaultVersionConflict">
+      <complexContent>
+         <extension base="vim25:MethodFault">
+            <sequence>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SrmFaultVmNotFoundInRecoveryPlan">
+      <complexContent>
+         <extension base="vim25:MethodFault">
+            <sequence>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+</schema>

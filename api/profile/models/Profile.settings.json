@@ -1,0 +1,42 @@
+{
+  "connection": "default",
+  "collectionName": "profile",
+  "info": {
+    "name": "profile",
+    "description": ""
+  },
+  "options": {
+    "timestamps": true
+  },
+  "attributes": {
+    "Name": {
+      "default": "",
+      "type": "string",
+      "required": true
+    },
+    "Datacenter": {
+      "default": "",
+      "type": "string",
+      "required": true
+    },
+    "Datastore": {
+      "default": "",
+      "type": "string",
+      "required": true
+    },
+    "ResourcePool": {
+      "default": "",
+      "type": "string",
+      "required": true
+    },
+    "Template": {
+      "default": "",
+      "type": "string",
+      "required": true
+    },
+    "vms": {
+      "collection": "vm",
+      "via": "Profile"
+    }
+  }
+}

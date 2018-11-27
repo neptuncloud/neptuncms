@@ -1,0 +1,35 @@
+{
+  "connection": "default",
+  "collectionName": "session",
+  "info": {
+    "name": "session",
+    "description": ""
+  },
+  "options": {
+    "timestamps": true
+  },
+  "attributes": {
+    "Username": {
+      "default": "",
+      "unique": true,
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "default": "",
+      "type": "string"
+    },
+    "tempcode": {
+      "default": "",
+      "type": "string"
+    },
+    "access_token": {
+      "default": "",
+      "type": "string"
+    },
+    "refresh_token": {
+      "default": "",
+      "type": "string"
+    }
+  }
+}

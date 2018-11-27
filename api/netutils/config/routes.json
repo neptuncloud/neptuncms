@@ -1,0 +1,9 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/freeip/:net/:mask",
+      "handler": "NetUtils.freeip"
+    }
+  ]
+}

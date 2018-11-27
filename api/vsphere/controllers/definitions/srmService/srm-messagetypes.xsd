@@ -1,0 +1,644 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+   Copyright 2005-2016 VMware, Inc.  All rights reserved.
+-->
+<schema
+   targetNamespace="urn:srm0"
+   xmlns="http://www.w3.org/2001/XMLSchema"
+   xmlns:srm0="urn:srm0"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+   xmlns:vim25="urn:vim25"
+   xmlns:reflect="urn:reflect"
+   elementFormDefault="qualified"
+>
+   <import namespace="urn:vim25" schemaLocation="query-types.xsd" />
+   <import namespace="urn:vim25" schemaLocation="vim-types.xsd" />
+   <import namespace="urn:vim25" schemaLocation="core-types.xsd" />
+   <import namespace="urn:reflect" schemaLocation="reflect-types.xsd" />
+   <include schemaLocation="srm-types.xsd" />
+   <complexType name="IsCreateProtectionGroupCompleteRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="GetCreateProtectionGroupResultRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="GetNewProtectionGroupRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="IsCreateRecoveryPlanCompleteRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="GetCreateRecovryPlanFailureRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="GetNewRecoveryPlanRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="IsDeleteRecoveryPlanCompleteRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="GetDeleteRecovryPlanFailureRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="SrmLoginRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="username" type="xsd:string" />
+         <element name="password" type="xsd:string" />
+      </sequence>
+   </complexType>
+   <complexType name="SrmLoginByTokenRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="samlToken" type="xsd:string" />
+      </sequence>
+   </complexType>
+   <complexType name="SrmLogoutRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="GetApiVersionRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="ListRecoveryPlansRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="RecoveryPlanSettingsRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="name" type="xsd:string" />
+      </sequence>
+   </complexType>
+   <complexType name="RecoveryPlanStartRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="name" type="xsd:string" />
+         <element name="mode" type="srm0:SrmApiRecoveryMode" />
+      </sequence>
+   </complexType>
+   <complexType name="RecoveryPlanPauseRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="name" type="xsd:string" />
+      </sequence>
+   </complexType>
+   <complexType name="RecoveryPlanResumeRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="name" type="xsd:string" />
+      </sequence>
+   </complexType>
+   <complexType name="RecoveryPlanCancelRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="name" type="xsd:string" />
+      </sequence>
+   </complexType>
+   <complexType name="RecoveryPlanAnswerPromptRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="name" type="xsd:string" />
+      </sequence>
+   </complexType>
+   <complexType name="GetFinalStatusRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="name" type="xsd:string" />
+         <element name="offset" type="xsd:int" />
+         <element name="maxLines" type="xsd:int" />
+      </sequence>
+   </complexType>
+   <complexType name="IsDiscoverDevicesTaskCompleteRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="GetDiscoverDevicesTaskFailuresRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="GetNameRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="GetParentFolderRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="AddFolderMappingRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="primaryFolder" type="vim25:ManagedObjectReference" />
+         <element name="secondaryFolder" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="AddNetworkMappingRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="primaryNetwork" type="vim25:ManagedObjectReference" />
+         <element name="secondaryNetwork" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="AddResourcePoolMappingRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="primaryPool" type="vim25:ManagedObjectReference" />
+         <element name="secondaryPool" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="AddTestNetworkMappingRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="secondaryNetwork" type="vim25:ManagedObjectReference" />
+         <element name="destinationTestNetwork" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="RemoveFolderMappingRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="primaryFolder" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="RemoveNetworkMappingRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="primaryNetwork" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="RemoveResourcePoolMappingRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="primaryPool" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="RemoveTestNetworkMappingRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="secondaryNetwork" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="GetProtectionGroupRootFolderRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="ListReplicatedDatastoresRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="ListUnassignedReplicatedDatastoresRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="ProtectionListProtectedDatastoresRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="ListProtectionGroupsRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="ListInventoryMappingsRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="ListUnassignedReplicatedVmsRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="replicationType" type="xsd:string" />
+      </sequence>
+   </complexType>
+   <complexType name="ProtectionListProtectedVmsRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="CreateAbrProtectionGroupRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="location" type="vim25:ManagedObjectReference" />
+         <element name="name" type="xsd:string" />
+         <element name="description" type="xsd:string" minOccurs="0" />
+         <element name="datastores" type="vim25:ManagedObjectReference" maxOccurs="unbounded" />
+      </sequence>
+   </complexType>
+   <complexType name="CreateHbrProtectionGroupRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="location" type="vim25:ManagedObjectReference" />
+         <element name="name" type="xsd:string" />
+         <element name="description" type="xsd:string" minOccurs="0" />
+         <element name="vms" type="vim25:ManagedObjectReference" maxOccurs="unbounded" />
+      </sequence>
+   </complexType>
+   <complexType name="RemoveProtectionGroupRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="group" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="GetInfoRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="GetPeerRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="ProtectionGroupGetParentFolderRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="ListProtectedVmsRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="ListProtectedDatastoresRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="ListAssociatedVmsRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="GetProtectionStateRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="ProtectionGroupGetOperationalLocationRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="ProtectionGroupListRecoveryPlansRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="ProtectionGroupQueryVmProtectionRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="vms" type="vim25:ManagedObjectReference" maxOccurs="unbounded" />
+      </sequence>
+   </complexType>
+   <complexType name="ProtectVmsRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="vms" type="srm0:SrmProtectionGroupVmProtectionSpec" maxOccurs="unbounded" />
+      </sequence>
+   </complexType>
+   <complexType name="UnprotectVmsRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="vms" type="vim25:ManagedObjectReference" maxOccurs="unbounded" />
+      </sequence>
+   </complexType>
+   <complexType name="AssociateVmsRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="vms" type="vim25:ManagedObjectReference" maxOccurs="unbounded" />
+      </sequence>
+   </complexType>
+   <complexType name="UnassociateVmsRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="vms" type="vim25:ManagedObjectReference" maxOccurs="unbounded" />
+      </sequence>
+   </complexType>
+   <complexType name="CheckConfiguredRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="ListChildProtectionGroupFoldersRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="ListChildProtectionGroupsRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="GetProtectionGroupRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="name" type="xsd:string" />
+      </sequence>
+   </complexType>
+   <complexType name="GetTasksRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="IsCompleteRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="GetResultRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="GetProtectionStatusRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="GetRecoveryPlanRootFolderRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="ListPlansRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="GetHistoryRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="plan" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="CreateRecoveryPlanRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="name" type="xsd:string" />
+         <element name="folder" type="vim25:ManagedObjectReference" />
+         <element name="groups" type="vim25:ManagedObjectReference" maxOccurs="unbounded" />
+         <element name="description" type="xsd:string" minOccurs="0" />
+         <element name="mapping" type="srm0:SrmRecoveryTestNetworkMapping" minOccurs="0" maxOccurs="unbounded" />
+      </sequence>
+   </complexType>
+   <complexType name="DeleteRecoveryPlanRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="plan" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="RecoveryPlanGetInfoRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="RecoveryPlanGetParentFolderRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="RecoveryPlanGetPeerRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="RecoveryPlanGetLocationRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="StartRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="mode" type="srm0:SrmRecoveryPlanRecoveryMode" />
+         <element name="options" type="srm0:SrmRecoveryOptions" minOccurs="0" />
+      </sequence>
+   </complexType>
+   <complexType name="CancelRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="ListPromptsRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="AnswerPromptRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="key" type="xsd:string" />
+         <element name="cancelVmRecovery" type="xsd:boolean" />
+         <element name="response" type="xsd:string" minOccurs="0" />
+      </sequence>
+   </complexType>
+   <complexType name="GetRecoverySettingsRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="vm" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="SetRecoverySettingsRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="vm" type="vim25:ManagedObjectReference" />
+         <element name="settings" type="srm0:SrmRecoverySettings" />
+      </sequence>
+   </complexType>
+   <complexType name="AddProtectionGroupRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="group" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="RemoveProtectionGroupFromRecoveryPlanRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="group" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="AddTestNetworkMappingToRecoveryPlanRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="secondaryNetwork" type="vim25:ManagedObjectReference" />
+         <element name="testNetwork" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="RemoveTestNetworkMappingFromRecoveryPlanRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="secondaryNetwork" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="RecoveryPlanHasRunningTaskRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="ListChildRecoveryPlanFoldersRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="ListChildRecoveryPlansRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="GetRecoveryPlanRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="name" type="xsd:string" />
+      </sequence>
+   </complexType>
+   <complexType name="GetResultCountRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="GetRecoveryResultRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="length" type="xsd:int" />
+      </sequence>
+   </complexType>
+   <complexType name="GetResultLengthRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="key" type="xsd:int" />
+      </sequence>
+   </complexType>
+   <complexType name="RetrieveStatusRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="key" type="xsd:int" />
+         <element name="offset" type="xsd:int" />
+         <element name="maxLines" type="xsd:int" />
+      </sequence>
+   </complexType>
+   <complexType name="IsRemoveProtectionGroupCompleteRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="GetRemoveProtectionGroupResultRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="RetrieveContentRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="SrmLoginLocaleRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="username" type="xsd:string" />
+         <element name="password" type="xsd:string" />
+         <element name="locale" type="xsd:string" minOccurs="0" />
+      </sequence>
+   </complexType>
+   <complexType name="SrmLoginByTokenLocaleRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="samlToken" type="xsd:string" />
+         <element name="locale" type="xsd:string" minOccurs="0" />
+      </sequence>
+   </complexType>
+   <complexType name="SrmLoginSitesRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="username" type="xsd:string" />
+         <element name="password" type="xsd:string" />
+         <element name="remoteUsername" type="xsd:string" />
+         <element name="remotePassword" type="xsd:string" />
+         <element name="locale" type="xsd:string" minOccurs="0" />
+      </sequence>
+   </complexType>
+   <complexType name="SrmLoginSitesByTokenRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="samlToken" type="xsd:string" />
+         <element name="remoteSamlToken" type="xsd:string" />
+         <element name="locale" type="xsd:string" minOccurs="0" />
+      </sequence>
+   </complexType>
+   <complexType name="SrmLoginRemoteSiteRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="remoteUsername" type="xsd:string" />
+         <element name="remotePassword" type="xsd:string" />
+         <element name="locale" type="xsd:string" minOccurs="0" />
+      </sequence>
+   </complexType>
+   <complexType name="SrmLoginRemoteSiteByTokenRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+         <element name="remoteSamlToken" type="xsd:string" />
+         <element name="locale" type="xsd:string" minOccurs="0" />
+      </sequence>
+   </complexType>
+   <complexType name="SrmLogoutLocaleRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="GetSolutionUserInfoRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="GetPairedSiteRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="GetPairedSiteSolutionUserInfoRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="GetSiteNameRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="GetLocalSiteInfoRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+   <complexType name="DiscoverDevicesRequestType">
+      <sequence>
+         <element name="_this" type="vim25:ManagedObjectReference" />
+      </sequence>
+   </complexType>
+</schema>

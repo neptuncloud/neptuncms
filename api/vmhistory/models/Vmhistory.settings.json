@@ -1,0 +1,25 @@
+{
+  "connection": "default",
+  "collectionName": "",
+  "info": {
+    "name": "vmhistory",
+    "description": ""
+  },
+  "options": {
+    "timestamps": true
+  },
+  "attributes": {
+    "Time": {
+      "default": "",
+      "type": "date"
+    },
+    "vm": {
+      "model": "vm",
+      "via": "vmHistories"
+    },
+    "Text": {
+      "default": "",
+      "type": "string"
+    }
+  }
+}

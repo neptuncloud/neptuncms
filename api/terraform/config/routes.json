@@ -1,0 +1,19 @@
+{
+  "routes": [
+    {
+      "method": "POST",
+      "path": "/terraform/prepare",
+      "handler": "Terraform.prepare"
+    },
+    {
+      "method": "POST",
+      "path": "/terraform/provide",
+      "handler": "Terraform.provide"
+    },
+    {
+      "method": "POST",
+      "path": "/terraform/log",
+      "handler": "Terraform.showLog"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "connection": "default",
+  "collectionName": "net",
+  "info": {
+    "name": "net",
+    "description": "Network"
+  },
+  "options": {
+    "timestamps": true
+  },
+  "attributes": {
+    "Name": {
+      "default": "",
+      "unique": true,
+      "type": "string",
+      "required": true
+    },
+    "vms": {
+      "collection": "vm",
+      "via": "Net"
+    },
+    "vlan": {
+      "default": "",
+      "type": "string"
+    },
+    "ip": {
+      "default": "",
+      "type": "string"
+    },
+    "gateway": {
+      "default": "",
+      "type": "string"
+    }
+  }
+}

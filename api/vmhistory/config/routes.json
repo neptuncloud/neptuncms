@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/vmhistories",
+      "handler": "Vmhistory.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/vmhistories/count",
+      "handler": "Vmhistory.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/vmhistories/:_id",
+      "handler": "Vmhistory.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/vmhistories",
+      "handler": "Vmhistory.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/vmhistories/:_id",
+      "handler": "Vmhistory.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/vmhistories/:_id",
+      "handler": "Vmhistory.destroy",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
