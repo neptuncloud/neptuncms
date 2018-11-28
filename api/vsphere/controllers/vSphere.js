@@ -48,7 +48,8 @@ module.exports = {
                                 if ( type == "ResourcePool" )
                                   pSpec = service.vim.PropertySpec({type:type, pathSet: ["name","owner"]}); else
                                   pSpec = service.vim.PropertySpec({type:type, pathSet: ["name"]}); 
-
+                                if  ( type == "Datastore" )
+                                  pSpec = service.vim.PropertySpec({type:type, pathSet: ["name","summary"]});
                                 console.log(pSpec);
                                 var opts = service.vim.RetrieveOptions({maxResults: 1000});
                                 console.log(opts);
@@ -94,8 +95,12 @@ module.exports = {
               results.push(res[i].propSet[1].val.value+'/Resources/'+res[i].propSet[0].val);
           }  else
           if(ctx.params.type == "ClusterComputeResource")
-            results.push([res[i].propSet[0].val,res[i].obj.value]); else
+            results.push([res[i].propSet[0].val,res[i].obj.value]); 
+          if( (ctx.params.type == "Datastore") && (ctx.params.ext == "Capacity") ) { 
+            results.push([res[i].propSet[0].val,res[i].propSet[1].val.capacity,res[i].propSet[1].val.freeSpace]);
+          } else
             results.push(res[i].propSet[0].val);
+          
        }   
     });
     console.log(results)

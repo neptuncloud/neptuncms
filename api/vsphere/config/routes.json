@@ -4,6 +4,11 @@
       "method": "GET",
       "path": "/vsphere/:type",
       "handler": "vSphere.get"
+    },
+    {
+      "method": "GET",
+      "path": "/vsphere/:type/:ext",
+      "handler": "vSphere.get"
     }
   ]
 }

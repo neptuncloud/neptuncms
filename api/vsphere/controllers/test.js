@@ -1,7 +1,8 @@
 var vs = require('./vSphere')
-var ctx = { 'params' : { 'type' : 'ResourcePool' } } 
+var ctx = { 'params' : { 'type' : 'Datastore' } } 
 var pools = vs.get(ctx)
 console.log(pools)
-var ctx = { 'params' : { 'type' : 'ClusterComputeResource' } } 
+var vs = require('./vSphere')
+var ctx = { 'params' : { 'type' : 'Datastore' } } 
 var pools = vs.get(ctx)
 console.log(pools)

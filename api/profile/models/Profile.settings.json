@@ -37,6 +37,10 @@
     "vms": {
       "collection": "vm",
       "via": "Profile"
+    },
+    "Storage": {
+      "model": "storage",
+      "via": "profiles"
     }
   }
 }

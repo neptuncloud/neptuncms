@@ -1,0 +1,25 @@
+{
+  "connection": "default",
+  "collectionName": "storage",
+  "info": {
+    "name": "storage",
+    "description": ""
+  },
+  "options": {
+    "timestamps": true
+  },
+  "attributes": {
+    "Name": {
+      "default": "",
+      "type": "string"
+    },
+    "datastores": {
+      "default": "",
+      "type": "json"
+    },
+    "profiles": {
+      "collection": "profile",
+      "via": "Storage"
+    }
+  }
+}
