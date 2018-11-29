@@ -1,3 +1,3 @@
-# terra
+## Neptun
 
-A quick description of terra.
+This is backend application for Neptun cloud management based on Strapi.
