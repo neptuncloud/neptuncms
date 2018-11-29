@@ -53,6 +53,14 @@
     "ip": {
       "default": "",
       "type": "string"
+    },
+    "datastore": {
+      "default": "",
+      "type": "string"
+    },
+    "resourcepool": {
+      "default": "",
+      "type": "string"
     }
   }
 }
